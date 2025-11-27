@@ -17,8 +17,8 @@ int dc[4] = {0, 1, 0, -1};
 // DO NOT MODIFY: Maze generation
 // ----------------------------------------------------------
 void generateMaze(vector<vector<int>>& maze, int N, int M) {
-    srand(time(0));
-
+    srand(time(0)); // random seeded with the current time
+    //
     for (int r = 0; r < N; r++) {
         for (int c = 0; c < M; c++) {
             int roll = rand() % 100;
@@ -117,9 +117,26 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-// bool dfs(……) {
-//     // Your code here
-// }
+bool dfs(int ent_row, int ent_col, vector<vector<int>> maze, vector<vector<bool>> visited, vector<vector<int>> parent_r, vector<vector<int>> parent_c, int exit_r, int exit_c) {
+    // Your code here
+    bool path_exists = false; // we initially say that there is no path
+
+    // base case
+    // if we find the exit
+    if (maze[ent_row][ent_col] == 1) {
+
+    }
+    // if we
+
+
+    // recursive case - if there is a cell that is open
+    // check up direction
+    if (maze[ent_row][ent_col] == ) {
+
+    }
+
+    return path_exists;
+}
 
 
 // ----------------------------------------------------------
@@ -159,7 +176,7 @@ int main() {
     // STUDENT WORK:
     // Call your DFS, track visited, and fill parent_r and parent_c
     // ------------------------------------------------------
-    // bool found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
+    bool found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
 
     // ------------------------------------------------------
     // STUDENT WORK:
