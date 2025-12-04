@@ -117,25 +117,15 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-bool dfs(int ent_row, int ent_col, vector<vector<int>> maze, vector<vector<bool>> visited, vector<vector<int>> parent_r, vector<vector<int>> parent_c, int exit_r, int exit_c) {
+bool dfs(int ent_row, int ent_col, vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c) {
     // Your code here
     bool path_exists = false; // we initially say that there is no path
+    stack<pair<int, int>> s; // make a stack to hold the pairs
+    s.push({ent_row, ent_col}); // add the cell to the stack
 
-    // base case
-    // if we find the exit
-    if (maze[ent_row][ent_col] == 1) {
+    // base case, the exit exist and we found it
+    if (ent_row == exit_r && ent_col == exit_c) { return true; }
 
-    }
-    // if we
-
-
-    // recursive case - if there is a cell that is open
-    // check up direction
-    if (maze[ent_row][ent_col] == ) {
-
-    }
-
-    return path_exists;
 }
 
 
@@ -176,8 +166,11 @@ int main() {
     // STUDENT WORK:
     // Call your DFS, track visited, and fill parent_r and parent_c
     // ------------------------------------------------------
-    bool found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
-
+    bool found = false;
+    found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
+    if (found) {
+        cout << "Path Exists";
+    }
     // ------------------------------------------------------
     // STUDENT WORK:
     // If found, print the path
