@@ -117,15 +117,31 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-bool dfs(int ent_row, int ent_col, vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c) {
+bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c) {
     // Your code here
     bool path_exists = false; // we initially say that there is no path
     stack<pair<int, int>> s; // make a stack to hold the pairs
-    s.push({ent_row, ent_col}); // add the cell to the stack
+    s.push({r, c}); // add the cell to the stack
 
-    // base case, the exit exist and we found it
-    if (ent_row == exit_r && ent_col == exit_c) { return true; }
+    // check out of bounds
+    if (r < 0 || r > maze.size() || c < 0 || c > maze[0].size()) { return false; } // if the cell we are looking at is out of the bounds of the matrix then that is an invalid path
 
+    // check if wall
+    if (maze[r][c] == 1 ) { return false; } // if the current cell is a wall then that is an invalid path
+
+    // check if visited
+    if (visited[r][c]) { return false; } // if we have already visited a cell then that is an invalid path
+
+    // Mark the cell as visited
+    visited[r][c] = true;
+
+    // check if we are at the end
+    if (r == exit_r && c == exit_c) { return true; }
+
+    // we have not found the exit yet so we need to keep looking at the surrounding cells
+    for (int d = 0; d < 4; d++) {
+        
+    }
 }
 
 
