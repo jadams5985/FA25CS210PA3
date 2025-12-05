@@ -142,7 +142,13 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
      */
     if (visited[r][c]) { return false; } // the current cell has already been traversed and should not be considered a possible path
 
-    
+   /*
+    * 3) wall check
+    *    - check if the current cell is a wall
+    */
+    if (maze[r][c] == 1) { return false; } // the current cell is a wall and is therefor an invalid path
+
+   
 }
 
 
