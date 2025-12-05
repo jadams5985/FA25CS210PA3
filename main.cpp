@@ -154,7 +154,15 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
     */
     visited[r][c] = true; // we mark this cell as visited
 
-    
+    /*
+     * 5) exit check
+     *    - we currently have a cell that is: in the maze, not a wall, has not been visited, and now documented as visited
+     */
+    if (r == exit_r && c == exit_c) { return true; } // we have found the exit, the path exitst
+
+    /*
+     * 6) look for the next open cell
+     */
 }
 
 
