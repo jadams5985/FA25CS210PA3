@@ -148,7 +148,13 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
     */
     if (maze[r][c] == 1) { return false; } // the current cell is a wall and is therefor an invalid path
 
-   
+   /*
+    * 4) mark as visited
+    *    - at this point the cell we are in is: in the maze, not a cell we have visited, and is not a wall
+    */
+    visited[r][c] = true; // we mark this cell as visited
+
+    
 }
 
 
