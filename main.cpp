@@ -132,12 +132,17 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
 
     /*
      * 1) bounds check
-     *  - check if the current cell is within the bounds of the maze
+     *    - check if the current cell is within the bounds of the maze
      */
     if (r < 0 || r >= maze.size() || c < 0 || c >= maze[0].size()) { return false; } // the cell is not within the bound is the maze and therefor cannot be part of the path
 
-    
+    /*
+     * 2) visited check
+     *    - check if the current cell has already been traversed
+     */
+    if (visited[r][c]) { return false; } // the current cell has already been traversed and should not be considered a possible path
 
+    
 }
 
 
