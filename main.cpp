@@ -117,24 +117,39 @@ void printPath(pair<int,int> exitcell,
 // STUDENTS IMPLEMENT DFS HERE
 // Add arguments, return type, and logic
 // ----------------------------------------------------------
-bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c) {
-    // Your code here
-    /*
+/*
      * TODO: travers the maze
      * 1) bounds check
+     *    - ends search
      * 2) visited check
+     *    - ends search
      * 3) wall check
+     *    - ends search
      * 4) mark as visited
      * 5) exit check
+     *    - path exists
      * 6) look for the next open cell
+     *    6a) update parent_r, parent_c
+     *    6b) recurse
      * 7) assume there is no path
+     *    - ends search
      */
+bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited, vector<vector<int>>& parent_r, vector<vector<int>>& parent_c, int exit_r, int exit_c) {
+
 
     /*
      * 1) bounds check
      *    - check if the current cell is within the bounds of the maze
      */
     if (r < 0 || r >= maze.size() || c < 0 || c >= maze[0].size()) { return false; } // the cell is not within the bound is the maze and therefor cannot be part of the path
+    // cout << "Wall (" << r << ", " << c << ")" << endl;
+
+
+    /*
+    * 3) wall check
+    *    - check if the current cell is a wall
+    */
+    if (maze[r][c] == 1) { return false; } // the current cell is a wall and is therefor an invalid path
 
     /*
      * 2) visited check
@@ -142,27 +157,43 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
      */
     if (visited[r][c]) { return false; } // the current cell has already been traversed and should not be considered a possible path
 
-   /*
-    * 3) wall check
-    *    - check if the current cell is a wall
-    */
-    if (maze[r][c] == 1) { return false; } // the current cell is a wall and is therefor an invalid path
 
    /*
     * 4) mark as visited
-    *    - at this point the cell we are in is: in the maze, not a cell we have visited, and is not a wall
+    *    - at this point the cell we are in is: in the maze, not a cell we have visited, and is not a wall... a.k.a. a valid cell
     */
     visited[r][c] = true; // we mark this cell as visited
-
+    // cout << "visited (" << r << ", " << c << ')' << endl;
     /*
      * 5) exit check
      *    - we currently have a cell that is: in the maze, not a wall, has not been visited, and now documented as visited
      */
-    if (r == exit_r && c == exit_c) { return true; } // we have found the exit, the path exitst
+    if (r == exit_r && c == exit_c) { return true; } // we have found the exit, the path exist
 
     /*
      * 6) look for the next open cell
+     *    - look: LEFT, UP, RIGHT, and DOWN to propagate the search
      */
+    for (int d = 0; d < 4; d++) {
+         // 6a) update parent_r, parent_c
+
+         // calculate the row and col for the new cell
+        int nr = r + dr[d];
+        int nc = c + dc[d];
+
+        // 6b) recures
+        //     - if the new cell is a valid path, then the search continues
+        if (dfs(nr, nc, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+            // update parents
+            parent_r[nr][nc] = r;
+            parent_c[nr][nc] = c;
+            return true;
+        } // we found the exit, the path exists
+
+    }
+
+    // 7) assume there is no path
+    return false; // there is no valid path
 }
 
 
