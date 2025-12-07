@@ -35,7 +35,6 @@ pair<int,int> chooseBoundaryCell(const vector<vector<int>>& maze) {
     int M = maze[0].size();
 
     while (true) {
-        cout << "Manjus code" << endl;
         int side = rand() % 4;
         int r, c;
 
@@ -122,9 +121,9 @@ void printPath(pair<int,int> exitcell,
      * TODO: travers the maze
      * 1) bounds check
      *    - ends search
-     * 2) visited check
+     * 2) wall check
      *    - ends search
-     * 3) wall check
+     * 3) visited check
      *    - ends search
      * 4) mark as visited
      * 5) exit check
@@ -144,13 +143,13 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
     if (r < 0 || r >= maze.size() || c < 0 || c >= maze[0].size()) { return false; } // the cell is not within the bound is the maze and therefor cannot be part of the path
 
     /*
-    * 3) wall check
+    * 2) wall check
     *    - check if the current cell is a wall...
     */
     if (maze[r][c] == 1) { return false; } // the current cell is a wall and is therefor an invalid path
 
     /*
-     * 2) visited check
+     * 3) visited check
      *    - check if the current cell has already been traversed
      */
     if (visited[r][c]) { return false; } // the current cell has already been traversed and should not be considered a possible path
@@ -200,12 +199,18 @@ bool dfs(int r, int c, vector<vector<int>>& maze, vector<vector<bool>>& visited,
 int main() {
     int N, M;
 
-    cout << "Enter maze dimensions N M: ";
-    cin >> N >> M;
+    cout << "Enter maze dimensions N M:\n";
+    cout << "N (rows): ";
+    cin >> N;
+    cin.ignore(10000, '\n');
+    cout << "M (cols): ";
+    cin >> M;
+    cin.ignore(10000, '\n');
 
     vector<vector<int>> maze(N, vector<int>(M));
     generateMaze(maze, N, M);
 
+    // there was an infinite loop if chooseBoundaryCell was called with a 1x1 matrix
     if (maze.size() == 1) {
         cout << "that doesn't make scenes" << endl;
         exit(0);
